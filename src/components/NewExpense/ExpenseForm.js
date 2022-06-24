@@ -2,18 +2,36 @@ import { useState } from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
+  // const [enteredTitle, setEnteredTitle] = useState("");
+  // const [enteredAmount, setEnteredAmount] = useState("");
+  // const [enteredDate, setEnteredDate] = useState("");
   const titleChangeHandler = (e) => {
-    setEnteredTitle(e.target.value);
+    // setEnteredTitle(e.target.value);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: e.target.value,
+    // });
+
+    // sigurniji, ispravan nacin da uvijek radis nad zadnjim stateom, jer ako imas vise azuriranja istog statea, treba paziti da se ne referenciras na neki stari state
+    setUserInput((prevState) => {
+      return { ...prevState, enteredTitle: e.target.value };
+    });
   };
   const amountChangeHandler = (e) => {
-    setEnteredAmount(e.target.value);
+    setUserInput((prevState) => {
+      return { ...prevState, enteredAmount: e.target.value };
+    });
   };
   const dateChangeHandler = (e) => {
-    setEnteredDate(e.target.value);
+    setUserInput((prevState) => {
+      return { ...prevState, enteredDate: e.target.value };
+    });
   };
+  const [userInput, setUserInput] = useState({
+    enteredTitle: "",
+    enteredAmount: "",
+    enteredDate: "",
+  });
   return (
     <form>
       <div className="new-expense__controls">
